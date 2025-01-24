@@ -1,33 +1,32 @@
 <?php
 
-include_once('connection.php');
+include_once ('connection.php');
 
-function test_input($data) {
-	
+function test_input($data)
+{
 	$data = trim($data);
 	$data = stripslashes($data);
 	$data = htmlspecialchars($data);
 	return $data;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	
-	$username = test_input($_POST["username"]);
-	$password = test_input($_POST["password"]);
-	$stmt = $conn->prepare("SELECT * FROM adminlogin");
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	$username = test_input($_POST['username']);
+	$password = test_input($_POST['password']);
+	// $cpassword = test_input($_POST['cpassword']);
+
+	$stmt = $conn->prepare('SELECT * FROM adminlogin');
 	$stmt->execute();
 	$users = $stmt->fetchAll();
-	
-	foreach($users as $user) {
-		
-		if(($user['username'] == $username) && 
-			($user['password'] == $password)) {
-				header("location: adminpage.php");
-		}
-		else {
+
+	foreach ($users as $user) {
+		if (($user['username'] == $username) &&
+				($user['password'] == $password)) {
+			header('location: adminpage.php');
+		} else {
 			echo "<script language='javascript'>";
 			echo "alert('WRONG INFORMATION')";
-			echo "</script>";
+			echo '</script>';
 			die();
 		}
 	}
