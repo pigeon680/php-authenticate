@@ -22,11 +22,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	foreach ($users as $user) {
 		if (($user['username'] == $username) &&
 				($user['password'] == $password)) {
-			header('location: adminpage.php');
+			header('location: PDF Download/htmllinkpdf.php');
 		} else {
-			echo "<script language='javascript'>";
-			echo "alert('WRONG INFORMATION')";
-			echo '</script>';
+			// echo "<script language='javascript'>";
+			// echo "alert('WRONG INFORMATION')";
+			// echo '</script>';
+			echo " <div class=\"alert alert-danger  
+            \t\talert-dismissible fade show\" role=\"alert\">  
+					<strong>Error!</strong>
+			
+					<button type=\"button\" class=\"close\" action=\"index.php\"
+						data-dismiss=\"alert aria-label=\"Close\"> 
+					<span aria-hidden=\"true\">×</span>  
+					</button>  
+			</div> ";
 			die();
 		}
 	}
